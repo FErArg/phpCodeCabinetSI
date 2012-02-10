@@ -2,6 +2,11 @@
 
 include_once("header.php");
 
+// SerInformaticos
+foreach( $_POST as $key => $value ){
+	$_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
+}
+
 if ((!$_POST['submit']) && (!$_GET['num_results'])) {
   echo "<p>&nbsp;</p>";
   $searchbox_type = "horizontal";
@@ -19,12 +24,12 @@ if ((!$_POST['submit']) && (!$_GET['num_results'])) {
   } else {
     $querywords_url = "nothingwasenteredinthesearchquery";
   }
-  
-// $querytype variable may come in from url 
+
+// $querytype variable may come in from url
   if ($_POST['querytype']) {
     $querytype = $_POST['querytype'];
   } else {
-    $querytype = $_GET['querytype']; 
+    $querytype = $_GET['querytype'];
   }
 
   if ($querywords_url) {
@@ -118,7 +123,7 @@ if ((!$_POST['submit']) && (!$_GET['num_results'])) {
 
 
   // now you can display the results returned
-  
+
   function trace_categories($parent_id) {
         GLOBAL $built_menu,$prefix;
         // Recursive function to display parent categories
@@ -194,7 +199,7 @@ if ((!$_POST['submit']) && (!$_GET['num_results'])) {
       // has remainder so add one page
       $pages++;
   }
-  
+
   if ($pages > 1) {
       for ($i=1; $i<=$pages; $i++) { // loop thru
           $newoffset = ($limit * ($i-1));

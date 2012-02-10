@@ -11,8 +11,6 @@ if (!$allow_index) { print "<META NAME=\"ROBOTS\" CONTENT=\"NOINDEX,NOFOLLOW\">\
 ?>
 
   <link rel="stylesheet" href="<?php echo "$base_url/themes/$theme/"; ?>style.css" type="text/css">
-
-  <!-- SerInformaticos -->
   <link rel="stylesheet" title="Zenburn" href="include/highlight/styles/default.css">
   <link rel="alternate stylesheet" title="Zenburn" href="include/highlight/styles/vs.css">
 
@@ -21,7 +19,7 @@ if (!$allow_index) { print "<META NAME=\"ROBOTS\" CONTENT=\"NOINDEX,NOFOLLOW\">\
   hljs.tabReplace = '    ';0
   hljs.initHighlightingOnLoad();
 </script>
-<!-- /SerInformaticos -->
+
 </head>
 <body>
 

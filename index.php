@@ -9,10 +9,10 @@ echo '
 <p>&nbsp;</p>
 <table width="640" border="1" cellspacing="4" cellpadding="3" align="center">
   <tr valign="top">
-    <td class="indextitle" colspan="3" valign="top" align="center">phpCodeCabinet Main Menu</td>
+    <td class="indextitle" colspan="3" valign="top" align="center">phpCodeCabinetSI Men&uacute; Principal</td>
   </tr>
   <tr valign="top">
-    <td class="indexmenu" colspan="2" valign="middle" align="center"><a href="browse.php">BROWSE CODE BY CATEGORY</a></td>
+    <td class="indexmenu" colspan="2" valign="middle" align="center"><a href="browse.php">Ver c&oacute;digo por Categor&iacute;a</a></td>
     <td class="indextitle"  rowspan="2" valign="top" align="center">
      ';
 
@@ -36,7 +36,7 @@ echo '
 
 echo '
     </td>
-    <td class="indexmenu" width="200" valign="middle" align="center"><a href="input.php">ADD CODE</a></td>
+    <td class="indexmenu" width="200" valign="middle" align="center"><a href="input.php">Agregar C&oacute;digo</a></td>
     </td>
   </tr>
 </table>

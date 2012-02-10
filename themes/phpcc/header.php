@@ -3,13 +3,13 @@
 
 <?php
 if (!$site_title) {
-  print "<title>phpCodeCabinet v".$version."</title>\n";
+  print "<title>phpCodeCabinetSI v".$version."</title>\n";
 } else {
   print "<title>".$site_title."</title>\n";
 }
 if (!$allow_index) { print "<META NAME=\"ROBOTS\" CONTENT=\"NOINDEX,NOFOLLOW\">\n"; }
 ?>
-<!-- SerInformaticos -->
+
   <link rel="stylesheet" href="<?php echo "$base_url/themes/$theme/"; ?>style.css" type="text/css">
   <link rel="stylesheet" title="Zenburn" href="include/highlight/styles/default.css">
   <link rel="alternate stylesheet" title="Zenburn" href="include/highlight/styles/vs.css">
@@ -19,7 +19,7 @@ if (!$allow_index) { print "<META NAME=\"ROBOTS\" CONTENT=\"NOINDEX,NOFOLLOW\">\
   hljs.tabReplace = '    ';0
   hljs.initHighlightingOnLoad();
 </script>
-<!-- /SerInformaticos -->
+
 </head>
 <body>
 

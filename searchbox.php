@@ -6,20 +6,20 @@ echo '
     <table align="center" width="100%" border="0" cellpadding="3" cellspacing="0">
       <tr>
         <td align="center" valign="top">
-        <h3>SEARCH:</h3>
+        <h3>Buscar:</h3>
         <input type="text" name="querywords" size="25"><br>
-        Require: <select name="querytype" size="1">
-          <option value="allwords" selected>All Words</option>
-          <option value="anywords">Any Words</option>
-          <option value="exactphrase">Exact Phrase</option>
+        Requiere: <select name="querytype" size="1">
+          <option value="allwords" selected>Todas palabras</option>
+          <option value="anywords">Algunas palabras</option>
+          <option value="exactphrase">Frase Exacta</option>
         </select><br>
-        Number of Results: <select name="num_results" size="1">
+        N&uacute;mero de Resultados: <select name="num_results" size="1">
           <option value="10">10</option>
           <option value="25">25</option>
           <option value="50">50</option>
         </select><br><br>
         <input type="hidden" name="searchtype" value="basic">
-        <center><input type="submit" name="submit" value="SEARCH"></center>
+        <center><input type="submit" name="submit" value="BUSCAR"></center>
         <br>
         </td>
       </tr>
@@ -34,15 +34,15 @@ echo '
     <table align="center" width="100%" border="0" cellpadding="3" cellspacing="0">
       <tr>
         <td align="center" valign="top">
-        <font size="4">SEARCH:</font> <input type="text" name="querywords" size="25">&nbsp;
+        <font size="4">Buscar:</font> <input type="text" name="querywords" size="25">&nbsp;
         <input type="hidden" name="searchtype" value="basic">
-        <input type="submit" name="submit" value="SEARCH"><br><br>
+        <input type="submit" name="submit" value="BUSCAR"><br><br>
         Require: <select name="querytype" size="1">
-          <option value="allwords" selected>All Words</option>
-          <option value="anywords">Any Words</option>
-          <option value="exactphrase">Exact Phrase</option>
+          <option value="allwords" selected>Todas palabras</option>
+          <option value="anywords">Algunas palabras</option>
+          <option value="exactphrase">Frase Exacta</option>
         </select>&nbsp;&nbsp;
-        Number of Results: <select name="num_results" size="1">
+        uacute;mero de Resultados: <select name="num_results" size="1">
           <option value="10">10</option>
           <option value="25">25</option>
           <option value="50">50</option>

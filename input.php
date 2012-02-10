@@ -9,6 +9,10 @@ if ($_SESSION['isloggedin'] != $glbl_hash) {
 
 // User must be authenticated (above), so we can move on
 
+// SerInformaticos
+foreach( $_GET as $key => $value ){
+	$_GET[$key] = filter_var($_GET[$key], FILTER_SANITIZE_STRING);
+}
 
 if (!$_GET['cid']) {
   // User must select category before entering code
@@ -50,7 +54,7 @@ if (($_GET['change'] == 1) && ($_GET['sid']) && ($_SESSION['isloggedin'])) {
 	  print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=browse.php">';
       }
   }
-  
+
 
   $magic_quotes_gpc = (bool) ini_get('magic_quotes_gpc');
   if ($magic_quotes_gpc) {
@@ -67,10 +71,14 @@ if (($_GET['change'] == 1) && ($_GET['sid']) && ($_SESSION['isloggedin'])) {
 } else if ((!$_GET['change']) && ($_SESSION['isloggedin'])) {
 
   $mod_author_name = $_SESSION['fullname'];
-  $mod_author_email = $_SESSION['user_email'];  
+  $mod_author_email = $_SESSION['user_email'];
 
 }
 
+// SerInformaticos
+foreach( $_POST as $key => $value ){
+	$_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
+}
 
 // Upon submission, check for required variables
 if ($_POST['submit'] && $_POST['snippet'] && $_POST['snippet_name'] && $_POST['category_id']) {
@@ -95,8 +103,8 @@ if ($_POST['submit'] && $_POST['snippet'] && $_POST['snippet_name'] && $_POST['c
 
   // Create date for datetime format
   $last_modified = date("Y-m-d H:i:s", mktime());
-  
-  
+
+
   $magic_quotes_gpc = (bool) ini_get('magic_quotes_gpc');
   if (!$magic_quotes_gpc) {
     // Check for magic quotes, if it's Off, addslashes
@@ -200,10 +208,64 @@ echo '
       <td align="left" width="250">
       <select name="highlight_mode" size="1" tabindex="6">';
 
+$highlightMode = array(
+			"a"	=> "ada95",
+			"ada"	=> "ada95",
+			"adb"	=> "ada95",
+			"ads"	=> "ada95",
+			"asm"	=> "asm_x86",
+			"asp"	=> "jscript|vb|vbdotnet",
+			"awk"	=> "awk",
+			"bas"	=> "vb|vbdotnet",
+			"c"	=> "c",
+			"cbl"	=> "cobol",
+			"cls"	=> "vb|vbdotnet",
+			"cob"	=> "cobol",
+			"cpy"	=> "cobol",
+			"cpp"	=> "cpp",
+			"cs"	=> "csharp",
+			"cxx"	=> "cpp",
+			"dat"	=> "mumps",
+			"dpr"	=> "delphi",
+			"e"	=> "eiffel|euphoria",
+			"ew"	=> "euphoria",
+			"eu"	=> "euphoria",
+			"ex"	=> "euphoria",
+			"exw"	=> "euphoria",
+			"exu"	=> "euphoria",
+			"frm"	=> "vb|vbdotnet",
+			"h"	=> "c",
+			"hpp"	=> "cpp",
+			"html"	=> "html",
+			"html5"	=> "html5",
+			"inc"	=> "turbopascal|vb|vbdotnet",
+			"java"	=> "javaswing",
+			"js"	=> "jscript|javascript",
+			"lsp"	=> "lisp",
+			"m"	=> "mumps",
+			"pas"	=> "delphi|turbopascal",
+			"php"	=> "php",
+			"php3"	=> "php3",
+			"php4"	=> "php4",
+			"php5"	=> "php5",
+			"pl"	=> "perl",
+			"pm"	=> "perl",
+			"py"	=> "python",
+			"pyc"	=> "python",
+			"rtn"	=> "mumps",
+			"scm"	=> "scheme",
+			"vb"	=> "vb|vbdotnet",
+			"vbs"	=> "vb|vbdotnet|vbscript",
+			"wsf"	=> "vbscript");
+
+foreach ( $highlightMode as $key => $value ){
+	echo '<option value="'.$value.'" selected>'.$value.'</option>';
+}
+/*
       if ($mod_highlight_mode) {
         echo '<option value="'.$mod_highlight_mode.'" selected>'.$mod_highlight_mode.'</option>';
       }
-
+*/
 $lang_types = list_files($HFile_dir);
 usort($lang_types, 'strcasecmp');
 $sizeof_lang_types = sizeof($lang_types);

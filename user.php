@@ -33,6 +33,12 @@ print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=index.php">';
 
 
 // Log user in if post variables are defined from form
+
+// SerInformaticos
+foreach( $_POST as $key => $value ){
+	$_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
+}
+
 if (($_POST['logmein']) && ($_POST['username']) && ($_POST['password'])) {
 
   //Make sure nobody tries to be shifty
@@ -66,7 +72,7 @@ echo '
     <table align="center" width="250" border="1">
       <tr>
         <td class="indextitle" align="center" valign="top">
-        <font size="4">USER LOGIN:</font><br><br>
+        <font size="4">Acceso:</font><br><br>
         <font size="2">USERNAME: (Case-sensitive)</font>
         <input type="text" name="username" size="35"><br>
         <font size="2">PASSWORD: (Case-sensitive)</font>
