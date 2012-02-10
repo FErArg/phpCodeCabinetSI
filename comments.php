@@ -1,12 +1,17 @@
 <?php
 
-include_once("header.php");
+include_once("include/header.php");
 
 
 
 if (($_SESSION['isloggedin'] == $glbl_hash) || ($_SESSION['isadmin'] == $glbl_hash)) {
 
   if ($allow_comments == 1) {  // Configured so only authenticated users and admins can post comments
+
+// SerInformaticos
+foreach( $_POST as $key => $value ){
+	$_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
+}
 
     if (($_POST['sid']) && ($_POST['confirm'] == 1) && ($_POST['comment'])) {
 
@@ -230,7 +235,7 @@ if ($allow_comments >= 2) { // Configured so anyone can post comments
       </table>
 
          ';
-	 
+
     } //end if remove
 
 }
@@ -254,6 +259,6 @@ if ($allow_comments == 0) { // Configured so anyone can post comments
 
 }
 
-include_once("footer.php");
+include_once("include/footer.php");
 
 ?>

@@ -1,4 +1,4 @@
-phpCodeCabinetSI - INSTALL
+phpCodeCabinet - INSTALL
 
 Installation of phpCC is relatively simple:
 
@@ -12,7 +12,7 @@ Installation of phpCC is relatively simple:
    following set of commands (assuming you have rights):
 
    ---------- MySQL ----------
-
+   
    /location/of/mysql/bin/mysql -uroot -p
 
    mysql> create database <nameofyourdatabase>;
@@ -23,29 +23,29 @@ Installation of phpCC is relatively simple:
 
    mysql> quit;
 
-
+   
    ---------- PostgreSQL ----------
-
+  
    $ su - postgres
    $ createdb <nameofyourdatabase>
-   $ createuser -D -A -P
+   $ createuser -D -A -P 
      Enter name of user to add: <username>
      Enter password for user "<username>":
      Enter it again:
    $ exit
 
-
+  
 
 3. Modify the config.php file with the appropriate settings.
    The configuration options in config.php are explained in
    the comments.  Be sure to review each of the values, including
    the datbase username/password and HFile directory (used for
    Beautifier).
-
+   
 
 4. Next, access phpCC through the web interface by pointing
    your browser at the following url:
-
+   
    http://<yourdomain.com>/<phpCC-directory>/setup.php
 
    Choose the 'Check Configuration' option to verify the validity
@@ -71,6 +71,6 @@ Installation of phpCC is relatively simple:
          http://phpcc.mtsdev.com/demo/.
 
 
-That's it!  Please report any bugs to the GitHUB project
-page located at: https://github.com/serinformaticos/phpCodeCabinetSI.
+That's it!  Please report any bugs to the SourceForge project
+page located at: http://sourceforge.net/projects/phpcodecabinet/.
 

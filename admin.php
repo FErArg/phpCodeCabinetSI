@@ -1,6 +1,6 @@
 <?php
 
-include_once("header.php");
+include_once("include/header.php");
 
 if ($_SESSION['isadmin'] != $glbl_hash) {
   print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=index.php">';
@@ -31,6 +31,6 @@ echo '
      ';
 
 
-include_once("footer.php");
+include_once("include/footer.php");
 
 ?>

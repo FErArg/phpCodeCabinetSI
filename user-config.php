@@ -1,6 +1,11 @@
 <?php
 
-include_once("header.php");
+include_once("include/header.php");
+
+// SerInformaticos
+foreach( $_POST as $key => $value ){
+	$_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
+}
 
 function list_themes($dir) {
 // Returns array of directory names from $dir
@@ -17,6 +22,11 @@ function list_themes($dir) {
   }
 
 return $theme_arr;
+}
+
+// SerInformaticos
+foreach( $_POST as $key => $value ){
+	$_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
 }
 
 if (($_POST['changeyou'] == 1) && ($_SESSION['isloggedin'] == $glbl_hash)) {
@@ -123,6 +133,6 @@ echo '
 print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=index.php">';
 }
 
-include_once("footer.php");
+include_once("include/footer.php");
 
 ?>

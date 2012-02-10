@@ -1,6 +1,4 @@
-phpCodeCabinetSI - README
-
-Based in the work of Brad Fears by SerInformaticos
+phpCodeCabinet - README
 
 Purpose: Collect code snippets from any and all languages
          for quick reference.
@@ -24,7 +22,7 @@ Core functionality goals of this project:
 6. Must be platform independent, and browser independent.
 
 7. Must utilize database abstraction layers.
-
+   
    NOTE: Abstraction layers are included for MySQL and
          PostgreSQL.
 
@@ -46,12 +44,12 @@ LOGIC BEHIND CATEGORY ADMINISTRATION:
    owner, and deletions can only occur if there are no code
    snippets or other categories listed as children of that
    category.  This means:
-
+   
    a. All code snippets or categories under a specific category
       must be re-classified before removing the category.
-
+      
    b. Modifications to a category can occur in 3 ways:
-
+      
       - If all code snippets or subcategories are
         owned by the parent category's owner.
       - By an administrator, suggested by the owner
@@ -62,7 +60,7 @@ LOGIC BEHIND CATEGORY ADMINISTRATION:
 	for this one are not likely to be met, as
 	users disappear over time, leaving their
 	code snippets unmaintained).
-
+   
 4. Users may suggest changes to unowned categories, but those
    changes can only be imposed by the owner, providing the
    category does not meet any of the restrictions from rule 3.
@@ -70,7 +68,7 @@ LOGIC BEHIND CATEGORY ADMINISTRATION:
    requested by the owner of a category.  Allowing non-owners
    to suggest changes directly to admins makes administration
    difficult, and poses a potential security risk.
-
+   
 5. Administrators have duties equivalent to moderators of a
    forum, weeding out ridiculous entries or censoring content
    per the guidelines of the hosting site.
@@ -80,11 +78,11 @@ LOGIC BEHIND CATEGORY ADMINISTRATION:
    to do so.  However, ownership of subcategories or code
    snippets underneath the transferred category will not
    change ownership.
-
+   
 
 Example Diagram of Categories and Rules:
 
-
+      
        Languages (Owned by Brad)
        ---------
           |
@@ -117,7 +115,7 @@ Example Diagram of Categories and Rules:
     will have to suggest the change to Brad, who could then
     make a decision based on Lucy's request and suggest
     the change be made by an administrator.
-
+                    
 ==> Lucy wants "Python" changed because it's not quite
     appropriate, yet there are others who are already using
     the category for their code.  Lucy should just create
@@ -126,7 +124,7 @@ Example Diagram of Categories and Rules:
 
 
 
-
+   
 License Information
 ===================
 
@@ -146,40 +144,4 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
--- Brad Fears <ddgenius@linuxmail.org>
-
-
-
-New Update And Version By SerInformaticos
-============================================
-
-
-Copyright (c) 2008, 2009, 2010, 2011, 2012 Fernando A. Rodriguez para SerInformaticos.es
-
-Este programa es software libre: usted puede redistribuirlo y / o modificarlo
-bajo los t&eacute;rminos de la GNU General Public License publicada por la
-la Free Software Foundation, bien de la versi&oacute;n 3 de la Licencia, o de
-la GPL2, o cualquier versi&oacute;n posterior.
-
-Este programa se distribuye con la esperanza de que sea &uacute;til,
-pero SIN NINGUNA GARANTÍA, incluso sin la garant&iacute;a impl&iacute;cita de
-COMERCIABILIDAD o IDONEIDAD PARA UN PROPÓSITO PARTICULAR. V&eacute;ase el
-GNU General Public License para m&aacute;s detalles.
-
-Usted deber&iacute;a haber recibido una copia de la Licencia P&uacute;blica General de GNU
-junto con este programa. Si no, visite <http://www.gnu.org/licenses/>.
-
-Puede descargar la version completa de la GPL3 en este enlace:
-	< http://www.serinformaticos.es/index.php?file=kop804.php >
-
-Para mas información puede contactarnos :
-
-  Teléfono  (+34) 961 19 60 62
-
-  Email:    info@serinformaticos.es
-
-  MSn:      info@serinformaticos.es
-
-  Twitter:  @SerInformaticos
-
-  Web:      www.SerInformaticos.es
+-- Brad Fears <ddgenius@linuxmail.org> 

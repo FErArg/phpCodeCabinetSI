@@ -1,6 +1,12 @@
 <?php
 
-include_once("header.php");
+include_once("include/header.php");
+
+// SerInformaticos
+foreach( $_POST as $key => $value ){
+	$_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
+}
+
 
 if (($_POST['addedit'] == 1) && ($_SESSION['isadmin'] == $glbl_hash)) {
 

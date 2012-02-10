@@ -42,7 +42,7 @@ echo '
           <option value="anywords">Algunas palabras</option>
           <option value="exactphrase">Frase Exacta</option>
         </select>&nbsp;&nbsp;
-        uacute;mero de Resultados: <select name="num_results" size="1">
+        N&uacute;mero de Resultados: <select name="num_results" size="1">
           <option value="10">10</option>
           <option value="25">25</option>
           <option value="50">50</option>

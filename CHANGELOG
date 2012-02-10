@@ -1,34 +1,23 @@
 --------------------------------------------
-CHANGELOG for phpCodeCabinetSI v0.6 (since 0.5)
---------------------------------------------
-1. Changed Highlight code system to highlight.js
-2. Commented old code from Beautifier
-3. Change code from "snippet.php" to use new
-   highlight system
-4. Change code "header.php" from themes to use new
-   highlight system
-4. Update Licence from GPL to GPLv3
-
---------------------------------------------
 CHANGELOG for phpCodeCabinet v0.5 (since 0.4)
 --------------------------------------------
 
 1. Fixed bug in snippet.php and input.php that
    stripped slashes from snippet if 'magic_quotes_gpc'
    was enabled in the php.ini.
-
+   
 2. Added another link for "ENTER CODE" in the
    category bar below the snippet listings.
    (Just to make it easier to find.)
-
+   
 3. Added option in config.php to specify allowable
    html tags for form fields other than the actual
    snippet (which allows all html tags by default).
-
+   
 4. Modified search.php to include author name/email
    and language when searching.  Now also presents
    snippet category with search results.
-
+   
 5. Fixed bug in category deletion that leaves
    subcategories and snippets orphaned.  Category
    deletion is now recursive in deleting
@@ -71,26 +60,26 @@ CHANGELOG for phpCodeCabinet v0.4 (since 0.3)
 
 2. Admins now have rights to modify or delete
    any snippet, regardless of ownership.
-
+   
 3. Modified search to include actual code
    snippets (work still needs to be done
    for optimization of the search).
 
 4. Added option to load printable version of
    each snippet in new browser window.
-
+   
 5. Added check for 'magic_quotes_gpc' variable
    upon inserting or updating code snippets.
-
+   
 6. Highlight mode and category selection lists
    are now ordered alphabetically.
-
+   
 7. Linebreaks will now be preserved in
    description and comment fields for snippets.
-
+   
 8. Modified snippet and subcategory summary
    info in browse.php to improve readability.
-
+   
 9. User's full name and email are now automatically
    inserted in code input form providing the user
    has logged in and filled out the full name and
@@ -141,7 +130,7 @@ CHANGELOG for phpCodeCabinet v0.3 (since 0.2)
    but categories could be created from admin
    menus.  Admin should now be able to create
    first category from either place.
-
+   
 6. Fixed minor html errors for backward
    compatibility, including the removal of
    enctype form element.

@@ -1,10 +1,15 @@
 <?php
 
-include_once("header.php");
+include_once("include/header.php");
 
 // SerInformaticos
 foreach( $_POST as $key => $value ){
 	$_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
+}
+
+// SerInformaticos
+foreach( $_GET as $key => $value ){
+	$_GET[$key] = filter_var($_GET[$key], FILTER_SANITIZE_STRING);
 }
 
 if ((!$_POST['submit']) && (!$_GET['num_results'])) {
@@ -227,6 +232,6 @@ if ((!$_POST['submit']) && (!$_GET['num_results'])) {
   echo "<p>&nbsp;</p>";
 
 
-include_once("footer.php");
+include_once("include/footer.php");
 
 ?>

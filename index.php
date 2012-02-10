@@ -1,7 +1,6 @@
 <?php
 
-include_once("header.php");
-
+include_once("include/header.php");
 
 echo '
 
@@ -46,6 +45,6 @@ echo '
      ';
 
 
-include_once("footer.php");
+include_once("include/footer.php");
 
 ?>

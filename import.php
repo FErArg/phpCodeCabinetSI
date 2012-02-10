@@ -1,11 +1,17 @@
 <?php
 
-include_once("header.php");
+include_once("include/header.php");
 
 if ($_SESSION['isloggedin'] != $glbl_hash) {
   print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=user.php">';
   exit; // Redirect browser and skip the rest
 }
+
+// SerInformaticos
+foreach( $_POST as $key => $value ){
+	$_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
+}
+
 
 // User must be authenticated (above), so we can move on
 
@@ -207,7 +213,7 @@ if (($_POST['categories'] || $_POST['snippet']) && ($_POST['select_imports'])) {
 
   if ($sizeof_each_snippet_record >= 1) {
   // Check for leftover, uncategorized snippets to put in the $import_to_parent category.
-      
+
       $populate_db = insert_snips(0, $_POST['import_to_parent'], &$each_snippet_record, 1);
       if ($populate_db) { $import_error .= $populate_db; } // If $populate_db has a value, there must have been an error.
 
@@ -268,7 +274,7 @@ if ((($_POST['getfile'] == 1) && ($_FILES['upfile']['name'] != "")) || (($back_t
       }
 
     }
-    
+
   } // end if $back_to_step2
 
   $serialized_category_record = base64_encode(serialize($each_category_record));
@@ -407,7 +413,7 @@ echo '
 
 
      $sizeof_each_category_record = sizeof($each_category_record);
-     
+
      for($x=0; $x<$sizeof_each_category_record; $x++) {
        // Create an array of cids to check parent_id against
        $temp_cids_array[$x] = $each_category_record[$x][0];
@@ -423,7 +429,7 @@ echo '
 
      }
 
-     
+
 
      // Search snippets and display any remaining snippets that were not imported with a category.
      $sizeof_each_snippet_record = sizeof($each_snippet_record);
@@ -461,7 +467,7 @@ echo '
     </td>
     <td valign="top" width="200">
     <p>&nbsp;</p>
-    
+
     <script language="JavaScript">
 
     function checkCats() {
@@ -492,7 +498,7 @@ echo '
     }
 
     </script>
-    
+
     <INPUT onclick=checkAll() type="button" value="Select Everything"><br><br>
     <INPUT onclick=checkCats() type="button" value="Select Only Categories"><br><br>
     <INPUT onclick=checkSnips() type="button" value="Select Only Snippets"><br><br>
@@ -525,7 +531,7 @@ echo '
 </table>
 <p>&nbsp;</p>
      ';
-     
+
 
 
 } else if (!$_POST['select_imports']) {
@@ -556,12 +562,12 @@ echo '
 </table>
 
      ';
-     
+
 }
 
 
 
 
-include_once("footer.php");
+include_once("include/footer.php");
 
 ?>

@@ -1,18 +1,38 @@
 <?php
 
-include_once("header.php");
+include_once("include/header.php");
 
 if ($_SESSION['isloggedin'] != $glbl_hash) {
   print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=user.php">';
   exit; // Redirect browser and skip the rest
 }
 
-// User must be authenticated (above), so we can move on
+
+/*
+  $snippet = str_replace('>', '&gt;', $snippet);
+  $snippet = str_replace('<', '&lt;', $snippet);
+*/
+// SerInformaticos
+foreach( $_POST as $key => $value ){
+	// Reemplaza el < ?php y ? > por
+	$_POST[$key] = str_replace('>', '&gt;', $_POST[$key]);
+    $_POST[$key] = str_replace('<', '&lt;', $_POST[$key]);
+
+    $_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
+}
 
 // SerInformaticos
 foreach( $_GET as $key => $value ){
-	$_GET[$key] = filter_var($_GET[$key], FILTER_SANITIZE_STRING);
+	// Reemplaza el < ?php y ? > por
+	$_GET[$key] = str_replace('>', '&gt;', $_GET[$key]);
+    $_GET[$key] = str_replace('<', '&lt;', $_GET[$key]);
+
+    $_GET[$key] = filter_var($_GET[$key], FILTER_SANITIZE_STRING);
 }
+
+
+// User must be authenticated (above), so we can move on
+
 
 if (!$_GET['cid']) {
   // User must select category before entering code
@@ -51,7 +71,7 @@ if (($_GET['change'] == 1) && ($_GET['sid']) && ($_SESSION['isloggedin'])) {
   if ($mod_owner_id != $_SESSION['userid']) {
       if ($_SESSION['isadmin'] != $glbl_hash) {
           unset($mod_sid,$mod_name,$mod_description,$mod_comment,$mod_author_name,$mod_author_email,$mod_language,$mod_highlight_mode,$mod_owner_id,$mod_snippet);
-	  print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=browse.php">';
+	 print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=browse.php">';
       }
   }
 
@@ -75,10 +95,6 @@ if (($_GET['change'] == 1) && ($_GET['sid']) && ($_SESSION['isloggedin'])) {
 
 }
 
-// SerInformaticos
-foreach( $_POST as $key => $value ){
-	$_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
-}
 
 // Upon submission, check for required variables
 if ($_POST['submit'] && $_POST['snippet'] && $_POST['snippet_name'] && $_POST['category_id']) {
@@ -132,7 +148,7 @@ if ($_POST['submit'] && $_POST['snippet'] && $_POST['snippet_name'] && $_POST['c
   } else {
     $insert = db_query("INSERT INTO ".$prefix."snippets (name, description, comment, author_name, author_email, language, highlight_mode, category_id, last_modified, owner_id, snippet) VALUES ('$stripped_snippet_name','$stripped_description','$stripped_comment','$stripped_author_name','$author_email','$stripped_language','$highlight_mode','".$_POST['category_id']."','$last_modified','".$_SESSION['userid']."','$stripped_snippet')");
   }
-
+	// echo $stripped_snippet;
   unset($_POST['submit'],$_POST['snippet'],$_POST['snippet_name'],$_POST['language'],$language,$_POST['highlight_mode'],$highlight_mode,$_POST['category_id'],$_POST['author_email'],$author_email,$_POST['permission'],$last_modified,$owner_id);
 
   print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=browse.php?cid='.$redirect.'">';
@@ -259,7 +275,8 @@ $highlightMode = array(
 			"wsf"	=> "vbscript");
 
 foreach ( $highlightMode as $key => $value ){
-	echo '<option value="'.$value.'" selected>'.$value.'</option>';
+	// echo '<option value="'.$value.'" selected>'.$value.'</option>';
+	echo '<option value="'.$value.'">'.$value.'</option>';
 }
 /*
       if ($mod_highlight_mode) {
@@ -325,6 +342,6 @@ echo '
 <p>&nbsp;</p>
       ';
 
-include_once("footer.php");
+include_once("include/footer.php");
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-include_once("header.php");
+include_once("include/header.php");
 
 function check_sub_owners($cid,$owner,$cnt) {
 GLOBAL $prefix;
@@ -29,7 +29,10 @@ GLOBAL $prefix;
 return $cnt;
 }
 
-
+// SerInformaticos
+foreach( $_POST as $key => $value ){
+	$_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
+}
 
 if ($_GET['msg'] == "err1") {
 echo '
@@ -167,7 +170,7 @@ while ($r = db_fetch_array($result)) {
           $result_categories = db_query($query_categories);
           $num_rows_categories3 = db_num_rows($result_categories);
 	}
-	
+
 	if ($num_rows_snippets3 && $num_rows_categories3) {
 	    $summary = "  ($num_rows_snippets3 Snippets, $num_rows_categories3 Subcategories)";
 	} else if (($num_rows_snippets3) && (!$num_rows_categories3)) {
@@ -276,6 +279,6 @@ echo '
      ';
 
 
-include_once("footer.php");
+include_once("include/footer.php");
 
 ?>
