@@ -16,7 +16,7 @@ echo '
 <p>&nbsp;</p>
 <table width="400" border="1" cellspacing="2" cellpadding="3" align="center">
   <tr valign="top">
-    <td class="indextitle" valign="top" align="center">phpCodeCabinet Administration Menu</td>
+    <td class="indextitle" valign="top" align="center">phpCodeCabinetSI Administration Menu</td>
   </tr>
   <tr valign="top">
     <td valign="top" align="center"><a href="category.php">Add/Modify Categories</a></td>
