@@ -1,0 +1,76 @@
+phpCodeCabinetSI - INSTALL
+
+Installation of phpCC is relatively simple:
+
+1. Untar and copy the contents of the phpcc directory to
+   the web directory of your choice.
+
+   tar xzf phpcc-x.x-tar.gz -C /your/web/directory
+
+
+2. If necessary, set up a database for phpCC using the
+   following set of commands (assuming you have rights):
+
+   ---------- MySQL ----------
+
+   /location/of/mysql/bin/mysql -uroot -p
+
+   mysql> create database <nameofyourdatabase>;
+
+   mysql> GRANT CREATE,INSERT,UPDATE,DELETE,SELECT,ALTER \
+       -> ON <nameofyourdatabase>.* TO <username>@localhost \
+       -> IDENTIFIED BY '<password>';
+
+   mysql> quit;
+
+
+   ---------- PostgreSQL ----------
+
+   $ su - postgres
+   $ createdb <nameofyourdatabase>
+   $ createuser -D -A -P
+     Enter name of user to add: <username>
+     Enter password for user "<username>":
+     Enter it again:
+   $ exit
+
+
+
+3. Modify the config.php file with the appropriate settings.
+   The configuration options in config.php are explained in
+   the comments.  Be sure to review each of the values, including
+   the datbase username/password and HFile directory (used for
+   Beautifier).
+
+
+4. Next, access phpCC through the web interface by pointing
+   your browser at the following url:
+
+   http://<yourdomain.com>/<phpCC-directory>/setup.php
+
+   Choose the 'Check Configuration' option to verify the validity
+   of your config.php settings, then choose the appropriate
+   option for a fresh install or an upgrade.
+
+   IMPORTANT: When you are finished with the setup.php file, be
+              sure to delete it.  Once the database tables are
+	      fixed for the appropriate version, it is no longer
+	      required, so it is much safer to simply remove it
+	      from the phpCC directory.
+
+
+5. Log into phpCC using 'admin' for the username and 'phpcc' for
+   the password.  Be sure to change the password.
+
+6. You can begin creating categories as long as you are logged in
+   as a user (admin optional).  A fresh install will have no
+   top-level categories, so plan accordingly before starting your
+   category structure.
+
+   NOTE: For category examples, see the online demo at
+         http://phpcc.mtsdev.com/demo/.
+
+
+That's it!  Please report any bugs to the GitHUB project
+page located at: https://github.com/serinformaticos/phpCodeCabinetSI.
+

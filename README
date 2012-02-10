@@ -1,0 +1,187 @@
+phpCodeCabinetSI - README
+
+Based in the work of Brad Fears by SerInformaticos
+
+Purpose: Collect code snippets from any and all languages
+         for quick reference.
+
+Core functionality goals of this project:
+
+1. Quickly searchable by snippet name, description, language,
+   category, or author.
+
+2. Must have categories / subcategories to organize snippets.
+
+3. Must be able to store code snippets from any language,
+   with highlighting provided by external library (Beautifier).
+
+4. Must be accessible online or offline, so it must have
+   importing / exporting capabilities.
+
+5. Should plug into any website, with user authentication and
+   ownership capabilities.
+
+6. Must be platform independent, and browser independent.
+
+7. Must utilize database abstraction layers.
+
+   NOTE: Abstraction layers are included for MySQL and
+         PostgreSQL.
+
+8. Must be theme-able.
+
+
+LOGIC BEHIND CATEGORY ADMINISTRATION:
+
+1. Categories will be created in hierarchical fashion, with
+   each category [db] record reflecting a "parent id", which
+   will track the hierarchical structure.  Categories with
+   parent ids of zero will be top level categories.
+
+2. Each category will have a designated "owner", being the user
+   that created the category, regardless of where it stands in
+   the hierarchical structure.
+
+3. Each category can only be modified and/or deleted by the
+   owner, and deletions can only occur if there are no code
+   snippets or other categories listed as children of that
+   category.  This means:
+
+   a. All code snippets or categories under a specific category
+      must be re-classified before removing the category.
+
+   b. Modifications to a category can occur in 3 ways:
+
+      - If all code snippets or subcategories are
+        owned by the parent category's owner.
+      - By an administrator, suggested by the owner
+        of the category.
+      - With permission granted from each owner of
+        each code snippet or category underneath
+	the category in question. (The requirements
+	for this one are not likely to be met, as
+	users disappear over time, leaving their
+	code snippets unmaintained).
+
+4. Users may suggest changes to unowned categories, but those
+   changes can only be imposed by the owner, providing the
+   category does not meet any of the restrictions from rule 3.
+   Changes that require admin privileges can ONLY be
+   requested by the owner of a category.  Allowing non-owners
+   to suggest changes directly to admins makes administration
+   difficult, and poses a potential security risk.
+
+5. Administrators have duties equivalent to moderators of a
+   forum, weeding out ridiculous entries or censoring content
+   per the guidelines of the hosting site.
+
+6. Ownership of categories can be transferred from one user
+   to another by administrators should they find it necessary
+   to do so.  However, ownership of subcategories or code
+   snippets underneath the transferred category will not
+   change ownership.
+
+
+Example Diagram of Categories and Rules:
+
+
+       Languages (Owned by Brad)
+       ---------
+          |
+  --------------------------------------
+  |                 |                  |
+ PHP (by Bob)     Perl (by Joe)     Python (By Brad)
+ ---              ----              ------
+                                       |
+              ---------------------------------------
+	      |                   |                 |
+	Networking (by Lucy)     FTP (by Joe)     HTTPS (by Brad)
+        ----------               ---              -----
+
+==> Lucy, Joe, and Brad were able to create categories under
+    Brad's "Python" category, but cannot delete or modify
+    the Python category.
+
+==> Lucy can delete her "Networking" category as long as
+    there are no other categories or code snippets underneath it.
+
+==> If Lucy owns all code snippets and categories underneath
+    her "Networking" category, they all must be re-classified
+    or removed before deleting the "Networking" category.
+
+==> Brad can no longer delete his "Python" category, unless
+    by chance everything underneath it were removed or
+    re-classified by their appropriate owners (not likely).
+
+==> If Lucy wants the "Python" category to be modified, she
+    will have to suggest the change to Brad, who could then
+    make a decision based on Lucy's request and suggest
+    the change be made by an administrator.
+
+==> Lucy wants "Python" changed because it's not quite
+    appropriate, yet there are others who are already using
+    the category for their code.  Lucy should just create
+    another category under "Languages" that might be more
+    appropriate for what she is doing.
+
+
+
+
+License Information
+===================
+
+Copyright (C) 2002 Brad Fears
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+-- Brad Fears <ddgenius@linuxmail.org>
+
+
+
+New Update And versioning By SerInformaticos
+============================================
+
+	/**************************************************************************************************
+	#     Copyright (c) 2008, 2009, 2010, 2011, 2012 Fernando A. Rodriguez para SerInformaticos.es    #
+	#                                                                                                 #
+	#     Este programa es software libre: usted puede redistribuirlo y / o modificarlo               #
+	#     bajo los t&eacute;rminos de la GNU General Public License publicada por la                  #
+	#     la Free Software Foundation, bien de la versi&oacute;n 3 de la Licencia, o de               #
+	#     la GPL2, o cualquier versi&oacute;n posterior.                                              #
+	#                                                                                                 #
+	#     Este programa se distribuye con la esperanza de que sea &uacute;til,                        #
+	#     pero SIN NINGUNA GARANTÍA, incluso sin la garant&iacute;a impl&iacute;cita de               #
+	#     COMERCIABILIDAD o IDONEIDAD PARA UN PROPÓSITO PARTICULAR. V&eacute;ase el                   #
+	#     GNU General Public License para m&aacute;s detalles.                                        #
+	#                                                                                                 #
+	#     Usted deber&iacute;a haber recibido una copia de la Licencia P&uacute;blica General de GNU  #
+	#     junto con este programa. Si no, visite <http://www.gnu.org/licenses/>.                      #
+	#                                                                                                 #
+	#     Puede descargar la version completa de la GPL3 en este enlace:                              #
+	#     	< http://www.serinformaticos.es/index.php?file=kop804.php >                               #
+	#                                                                                                 #
+	#     Para mas información puede contactarnos :                                                   #
+	#                                                                                                 #
+	#       Teléfono  (+34) 961 19 60 62                                                              #
+	#                                                                                                 #
+	#       Email:    info@serinformaticos.es                                                         #
+	#                                                                                                 #
+	#       MSn:      info@serinformaticos.es                                                         #
+	#                                                                                                 #
+	#       Twitter:  @SerInformaticos                                                                #
+	#                                                                                                 #
+	#       Web:      www.SerInformaticos.es                                                          #
+	#                                                                                                 #
+	**************************************************************************************************/

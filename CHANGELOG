@@ -1,0 +1,231 @@
+--------------------------------------------
+CHANGELOG for phpCodeCabinetSI v0.6 (since 0.5)
+--------------------------------------------
+1. Changed Highlight code system to highlight.js
+2. Commented old code from Beautifier
+3. Change code from "snippet.php" to use new
+   highlight system
+4. Change code "header.php" from themes to use new
+   highlight system
+4. Update Licence from GPL to GPLv3
+
+--------------------------------------------
+CHANGELOG for phpCodeCabinet v0.5 (since 0.4)
+--------------------------------------------
+
+1. Fixed bug in snippet.php and input.php that
+   stripped slashes from snippet if 'magic_quotes_gpc'
+   was enabled in the php.ini.
+
+2. Added another link for "ENTER CODE" in the
+   category bar below the snippet listings.
+   (Just to make it easier to find.)
+
+3. Added option in config.php to specify allowable
+   html tags for form fields other than the actual
+   snippet (which allows all html tags by default).
+
+4. Modified search.php to include author name/email
+   and language when searching.  Now also presents
+   snippet category with search results.
+
+5. Fixed bug in category deletion that leaves
+   subcategories and snippets orphaned.  Category
+   deletion is now recursive in deleting
+   subcategories and snippets, provided user is
+   either an admin or owns all subordinate items.
+
+6. Fixed http script injection vulnerability
+   within several files.  Thanks to Yao-Wen (Wayne)
+   Huang for pointing them out.
+
+7. Tabs are now preserved within code snippets.
+
+8. Added functionality for importing / exporting
+   categories and snippets. Currently exports in
+   CSV format.
+
+
+
+Modified Files:
+- browse.php
+- category.php
+- comments.php
+- config.php
+- export.php
+- import.php
+- input.php
+- search.php
+- setup.php
+- snippet.php
+- theme/facade/header.php
+- theme/phpcc/header.php
+
+
+--------------------------------------------
+CHANGELOG for phpCodeCabinet v0.4 (since 0.3)
+--------------------------------------------
+
+1. Added several database indexes for optimized
+   queries. (Thanks to Cameron Brunner)
+
+2. Admins now have rights to modify or delete
+   any snippet, regardless of ownership.
+
+3. Modified search to include actual code
+   snippets (work still needs to be done
+   for optimization of the search).
+
+4. Added option to load printable version of
+   each snippet in new browser window.
+
+5. Added check for 'magic_quotes_gpc' variable
+   upon inserting or updating code snippets.
+
+6. Highlight mode and category selection lists
+   are now ordered alphabetically.
+
+7. Linebreaks will now be preserved in
+   description and comment fields for snippets.
+
+8. Modified snippet and subcategory summary
+   info in browse.php to improve readability.
+
+9. User's full name and email are now automatically
+   inserted in code input form providing the user
+   has logged in and filled out the full name and
+   email information for their account.
+
+
+
+Modified Files:
+- setup.php
+- input.php
+- snippet.php
+- search.php
+- user-config.php
+- category.php
+- browse.php
+- user.php
+- theme/phpcc/header.php
+- theme/phpcc/footer.php
+- theme/facade/header.php
+- theme/facade/footer.php
+
+
+--------------------------------------------
+CHANGELOG for phpCodeCabinet v0.3 (since 0.2)
+--------------------------------------------
+
+1. Fixed bug in setup that incorrectly attempted
+   to rename tables when upgrading.
+
+2. Modified database abstraction layer for MySQL
+   to return mysql errors as strings rather than
+   echo'ing to the screen.
+
+3. Created additional checks in setup.php for
+   installation/upgrade of database tables, as
+   well as an option for checking the validity
+   of configuration variables defined in the
+   config.php file.
+
+4. Fixed syntax error in Beautifier package for
+   html syntax highlighting.  Thanks to Lonnie
+   Webb for the fix.
+
+5. Fixed problem in creating first category
+   after a fresh installation (logged in as
+   admin account).  Option for creating a top-
+   level category while browsing was missing,
+   but categories could be created from admin
+   menus.  Admin should now be able to create
+   first category from either place.
+
+6. Fixed minor html errors for backward
+   compatibility, including the removal of
+   enctype form element.
+
+7. Added code to strip html tags from form fields
+   upon inserting or editing a snippet.  This is
+   designed to prevent someone from creating
+   links or other annoying html elements in the
+   fields.
+
+8. Added config options to disallow indexing by
+   search engines using <META> tag.
+
+9. Added option to change default site <title>
+   for standalone installations.
+
+10. Fixed menu bar to display 'USER INFO' for
+    admin users as well as other authenticated
+    users.
+
+11. Added abstraction layer and modified SQL
+    syntax for PostgreSQL comptability.
+    Special thanks to Doug Damon for all the
+    code to make this work.
+
+
+
+Modified Files:
+- INSTALL
+- addedit-users.php
+- category.php
+- admin.php
+- footer.php
+- header.php
+- index.php
+- input.php
+- user.php
+- user-config.php
+- config.php
+- setup.php
+- browse.php
+- search.php
+- searchbox.php
+- snippet.php
+- dal/mysql.inc
+- dal/pgsql.inc
+- include/HFile/HFile_html.php
+- themes/facade/header.php
+- themes/phpcc/header.php
+
+--------------------------------------------
+CHANGELOG for phpCodeCabinet v0.2 (since 0.1)
+--------------------------------------------
+
+1. Fixed bug in input.php that prevented use
+   of "Unlisted Language" option.  There now
+   exists an option for "Unlisted", which is
+   tied to a syntax file in the Beautifier
+   package.
+
+2. Modified database table structure to use
+   prefixes for table names, for those users
+   with access to only one database.  Table
+   prefix can be configured as a global
+   variable.
+
+3. Installation process now uses web interface
+   for database configurations.
+
+
+
+Modified Files:
+- INSTALL
+- input.php
+- setup.php
+- addedit-users.php
+- browse.php
+- category.php
+- input.php
+- search.php
+- snippet.php
+- user-config.php
+- user.php
+- include/HFile/HFile_Unlisted.php
+
+
+

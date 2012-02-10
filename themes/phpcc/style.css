@@ -1,0 +1,245 @@
+/* Non-specific default styles */
+BODY {
+background-color: #FFFFFF;
+color: black;
+}
+
+A:active, A:link, A:visited {
+color: green;
+font-weight: bold;
+font-family: Arial;
+font-size: 12px;
+}
+
+TD {
+font-family: Arial;
+font-size: 12px;
+}
+
+
+
+
+/* Index styles */
+TD.indexmenu {
+background-color: #FFF8DC;
+font-family: Arial;
+font-size: 12px;
+}
+
+TD.indextitle {
+background-color: #CCCCCC;
+font-family: Arial;
+font-size: 16px;
+font-weight: bold;
+}
+
+
+
+
+/* Main menu styles */
+A:active.mainmenu, A:link.mainmenu, A:visited.mainmenu {
+color: #FFFFFF;
+font-weight: bold;
+font-family: Arial;
+font-size: 12px;
+}
+
+
+
+
+/* Title styles */
+TD.titletop {
+background-color: #A00000;
+color: #FFFFFF;
+font-family: Arial;
+font-size: 12px;
+font-weight: bold;
+}
+
+TD.titlebottom {
+background-color: #A00000;
+color: #FFFFFF;
+font-family: Arial;
+font-size: 12px;
+}
+
+TD.browsetitle {
+background-color: #CCCCCC;
+font-family: Arial;
+font-size: 16px;
+font-weight: bold;
+}
+
+TD.categoryadmintitle {
+background-color: #CCCCCC;
+font-family: Arial;
+font-size: 16px;
+font-weight: bold;
+}
+
+
+
+
+/* Category styles */
+TD.categorynav {
+background-color: #FFF8DC;
+font-family: Arial;
+font-size: 12px;
+}
+
+TD.categoryadminmenu {
+background-color: #FFFFFF;
+font-family: Arial;
+font-size: 12px;
+}
+
+
+
+
+/* Snippet styles */
+TD.browsesnippets {
+background-color: #FFF8DC;
+font-family: Arial;
+font-size: 12px;
+}
+
+TD.snippetinfo {
+background-color: #CCCCCC;
+font-family: Arial;
+font-size: 12px;
+}
+
+
+
+
+/* Admin styles */
+TD.adminmenu {
+background-color: #CCCCCC;
+font-family: Arial;
+font-size: 12px;
+}
+
+
+
+
+/* User Info styles */
+TD.userinfo {
+background-color: #FFF8DC;
+font-family: Arial;
+font-size: 12px;
+}
+
+
+
+
+/* Code entry styles */
+TD.newcodeentry {
+background-color: #FFF8DC;
+font-family: Arial;
+font-size: 12px;
+}
+
+
+
+
+/* HTML Header styles */
+H3.err1 {
+background-color: #FFF8DC;
+color: red;
+font-family: Arial;
+font-size: 16px;
+font-weight: bold;
+}
+
+H3.info {
+font-family: Arial;
+font-size: 16px;
+color: red;
+}
+
+
+
+
+/* Search styles */
+TD.searchalt1 {
+background-color: #FFF8DC;
+}
+
+TD.searchalt2 {
+background-color: #FFFFFF;
+}
+
+
+
+/* Comments styles */
+TD.commentwindow {
+background-color: #FFF8DC;
+font-family: Arial;
+font-size: 12px;
+}
+
+TEXTAREA.comment {
+font-family: Arial;
+font-size: 12px;
+}
+
+INPUT.comment {
+font-family: Arial;
+font-size: 12px;
+}
+
+TD.commsubject {
+background-color: #FFF8DC;
+}
+
+
+/* Export legend */
+A:active.export_legend1, A:link.export_legend1, A:visited.export_legend1 {
+background-color: blue;
+color: #FFFFFF;
+font-weight: bold;
+font-family: Arial;
+font-size: 12px;
+}
+
+A:active.export_legend2, A:link.export_legend2, A:visited.export_legend2 {
+background-color: green;
+color: #FFFFFF;
+font-weight: bold;
+font-family: Arial;
+font-size: 12px;
+}
+
+A:active.export_legend3, A:link.export_legend3, A:visited.export_legend3 {
+background-color: #A00000;
+color: #FFFFFF;
+font-weight: bold;
+font-family: Arial;
+font-size: 12px;
+}
+
+
+/* Import legend */
+LI.import_legend1 {
+color: blue;
+font-family: Arial;
+font-size: 12px;
+}
+
+LI.import_legend2 {
+color: green;
+font-family: Arial;
+font-size: 12px;
+}
+
+LI.import_legend3 {
+color: orange;
+font-family: Arial;
+font-size: 12px;
+}
+
+LI.import_legend4 {
+color: red;
+font-family: Arial;
+font-size: 12px;
+}
