@@ -97,8 +97,6 @@ if ($_POST['submit'] && $_POST['snippet'] && $_POST['snippet_name'] && $_POST['c
     $highlight_mode = $_POST['highlight_mode'];
   }
 
-  $language = strtolower($_POST['language']);
-
   $redirect = $_POST['category_id'];
 
   // Create date for datetime format
@@ -133,18 +131,28 @@ if ($_POST['submit'] && $_POST['snippet'] && $_POST['snippet_name'] && $_POST['c
 	if( empty($_POST['language']) ){
 		$_POST['language'] = $_POST['highlight_mode'];
 	}
+
+	if (!$_POST['language']) {
+		$language = addslashes($_POST['highlight_mode']);
+	} else {
+		$language = strtolower($_POST['language']);
+	}
+
+/*
     $insert = db_query("INSERT INTO ".$prefix."snippets (name, description, comment, author_name, author_email, language, highlight_mode, category_id, last_modified, owner_id, snippet)
 						VALUES ('$stripped_snippet_name','$stripped_description','$stripped_comment','$stripped_author_name','$author_email','$stripped_language','$highlight_mode','".$_POST['category_id']."','$last_modified','".$_SESSION['userid']."','$stripped_snippet')");
-/*
+*/
+
     echo "<pre>";
     print_r($_POST);
     echo "</pre>";
-*/
-  }
 
+  }
+/*
   unset($_POST['submit'],$_POST['snippet'],$_POST['snippet_name'],$_POST['language'],$language,$_POST['highlight_mode'],$highlight_mode,$_POST['category_id'],$_POST['author_email'],$author_email,$_POST['permission'],$last_modified,$owner_id);
 
   print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=browse.php?cid='.$redirect.'">';
+*/
   exit;
 
 } // end check for required variables

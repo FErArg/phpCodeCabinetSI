@@ -5,8 +5,7 @@
 
 /* URL for phpCC */
 # NOTE: No trailing slash
-$base_url = "http://serinformaticos.mine.nu:6088/estudios/SerInformaticos/phpCodeCabinetSI/phpCodeCabinetSI";
-// $base_url = "http://serinformaticos.mine.nu:6088/phpcc";
+ $base_url = "http://www.serinformaticos.es/phpcc";
 
 
 /* Database Abstraction Layer Directory */
@@ -24,9 +23,9 @@ $dbtype = "mysql";      // Database type
                         // pgsql = PostgreSQL
 
 $dbhost = "localhost";  // Database hostname
-$dbname = "phpCodeCabinet";           // Database name
-$dbuser = "phpCodeCabinet";           // Database username
-$dbpass = "156379FErArg";           // Database password
+$dbname = "DB";           // Database name
+$dbuser = "USER";           // Database username
+$dbpass = "PASS";           // Database password
 
 
 # Snippet comment options
@@ -88,7 +87,7 @@ $glbl_hash = "*&fp7uC-9DA#2^jF&}E1|K8Q%dP/T7bo7uf{1]}|a:Pa_pm4O.";
 #############################
 
 /* Version */
-$version = "0.6.1";
+$version = "0.6.2";
 
 switch (strtolower($dbtype)) {
     case ("mysql"):
