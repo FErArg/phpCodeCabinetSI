@@ -1,6 +1,6 @@
 <?php
 
-include_once("include/header.php");
+include_once("header.php");
 
 if ($_SESSION['isloggedin'] != $glbl_hash) {
   print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=user.php">';
@@ -9,15 +9,6 @@ if ($_SESSION['isloggedin'] != $glbl_hash) {
 
 // User must be authenticated (above), so we can move on
 
-// SerInformaticos
-foreach( $_POST as $key => $value ){
-	$_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
-}
-
-// SerInformaticos
-foreach( $_GET as $key => $value ){
-	$_GET[$key] = filter_var($_GET[$key], FILTER_SANITIZE_STRING);
-}
 
 function check_sub_owners($cid,$owner,$cnt) {
 GLOBAL $prefix;
@@ -401,6 +392,6 @@ echo '
 
 } // if no submit
 
-include_once("include/footer.php");
+include_once("footer.php");
 
 ?>

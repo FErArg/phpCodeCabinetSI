@@ -1,6 +1,6 @@
 <?php
 
-include_once("include/header.php");
+include_once("header.php");
 
 
 
@@ -259,6 +259,6 @@ if ($allow_comments == 0) { // Configured so anyone can post comments
 
 }
 
-include_once("include/footer.php");
+include_once("footer.php");
 
 ?>

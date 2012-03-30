@@ -1,11 +1,7 @@
 <?php
 
-include_once("include/header.php");
+include_once("header.php");
 
-// SerInformaticos
-foreach( $_GET as $key => $value ){
-	$_GET[$key] = filter_var($_GET[$key], FILTER_SANITIZE_STRING);
-}
 
 if (!$_GET['install']) {
   echo "<p>&nbsp;</p>
@@ -187,7 +183,7 @@ if ($_GET['install'] == "new") {
                         admin integer NOT NULL default '0',
                         PRIMARY KEY  (userid)
                       );";
-
+	
       $build_query .= "CREATE INDEX username_".$prefix."users_key ON ".$prefix."users(username);";
 
   }
@@ -202,8 +198,8 @@ if ($_GET['install'] == "new") {
   if (!$err_install) {
       $query3a = db_query("INSERT INTO ".$prefix."users (username, password, fullname, email, theme, admin) VALUES ('admin', 'cae1ec0a768139004227f1f110816a15', '','', 'phpcc', 1)");
   }
-
-
+  
+  
   if ($dbtype == "mysql") {
 
       $build_query = "CREATE TABLE ".$prefix."user_comments (
@@ -430,6 +426,6 @@ if (($finished == 1) && (($err_install) || ($err_upgrade))) {
 
 if ($finished == 1) { echo $status; }
 
-include_once("include/footer.php");
+include_once("footer.php");
 
 ?>

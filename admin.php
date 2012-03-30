@@ -1,6 +1,6 @@
 <?php
 
-include_once("include/header.php");
+include_once("header.php");
 
 if ($_SESSION['isadmin'] != $glbl_hash) {
   print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=index.php">';
@@ -16,7 +16,7 @@ echo '
 <p>&nbsp;</p>
 <table width="400" border="1" cellspacing="2" cellpadding="3" align="center">
   <tr valign="top">
-    <td class="indextitle" valign="top" align="center">phpCodeCabinetSI Administration Menu</td>
+    <td class="indextitle" valign="top" align="center">phpCodeCabinet Administration Menu</td>
   </tr>
   <tr valign="top">
     <td valign="top" align="center"><a href="category.php">Add/Modify Categories</a></td>
@@ -31,6 +31,6 @@ echo '
      ';
 
 
-include_once("include/footer.php");
+include_once("footer.php");
 
 ?>

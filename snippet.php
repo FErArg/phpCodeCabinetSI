@@ -1,11 +1,6 @@
 <?php
 
-include_once("include/header.php");
-
-// SerInformaticos
-foreach( $_GET as $key => $value ){
-	$_GET[$key] = filter_var($_GET[$key], FILTER_SANITIZE_STRING);
-}
+include_once("header.php");
 
 $result = db_query("SELECT sid,name,description,comment,author_name,author_email,language,highlight_mode,category_id,last_modified,owner_id,snippet FROM ".$prefix."snippets WHERE sid='".$_GET['sid']."'");
 list($sid,$name,$description,$comment,$author_name,$author_email,$language,$highlight_mode,$category_id,$last_modified,$owner_id,$snippet) = db_fetch_array($result);
@@ -298,7 +293,7 @@ if ($allow_comments) { // First check to make sure comments are enabled
 
 
 
-include_once("include/footer.php");
+include_once("footer.php");
 
 ?>
 

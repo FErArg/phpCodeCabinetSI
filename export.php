@@ -1,25 +1,15 @@
 <?php
 
-// SerInformaticos
-foreach( $_POST as $key => $value ){
-	$_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
-}
-
-// SerInformaticos
-foreach( $_GET as $key => $value ){
-	$_GET[$key] = filter_var($_GET[$key], FILTER_SANITIZE_STRING);
-}
-
 if ($_GET['final_export_array']) {
 
   $date = date("m-d-Y", mktime());
   header("Content-type: application/octet-stream");
   header("Content-disposition: attachment; filename=phpcc-$date.csv");
   session_start();
-  require_once("include/config.php");
+  require_once("config.php");
 
 } else {
-  include_once("include/header.php");
+  include_once("header.php");
 }
 
 
@@ -110,7 +100,7 @@ if ((  ($_POST['cid']) || ($_GET['cid'])) && (($_POST['confirm_export'] == 1) ||
   // Use all 'cid' and 'sid' variables from session
 
   if ($_GET['final_export_array']) {
-
+  
     if ($_POST['export_file_type']) {
       $export_file_type = $_POST['export_file_type'];
     } else {
@@ -124,7 +114,7 @@ if ((  ($_POST['cid']) || ($_GET['cid'])) && (($_POST['confirm_export'] == 1) ||
       // File format consists of the following:
       // First line is db field descriptions for rebuilding tables,
       // then comes categories, followed by snippets.
-
+      
       $sizeof_export_categories = sizeof($_SESSION['export_categories']);
       for ($x=1; $x<=$sizeof_export_categories; $x++) {
         $cat_query = db_query("SELECT * FROM ".$prefix."categories WHERE cid='".$_SESSION['export_categories'][$x]."'");
@@ -154,7 +144,7 @@ if ((  ($_POST['cid']) || ($_GET['cid'])) && (($_POST['confirm_export'] == 1) ||
 	if ($x > 1) { echo ","; }
 	echo "$sid,$name,$description,$comment,$author_name,$author_email,$language,$highlight_mode,$category_id,$last_modified,$owner_id,$snippet\n";
       }
-
+      
 
       ##############################################
 
@@ -241,7 +231,7 @@ echo '</td>
       <a class="export_legend2" href="">&nbsp;S&nbsp;</a> = Select just this category, excluding any subcategories or snippets.<br>
       </blockquote><hr>
      ';
-
+     
 if (!$_GET['cid']) {
   echo '<blockquote><b>Use the links below to browse to a desired category.</b></blockquote>';
 }
@@ -302,7 +292,7 @@ while ($r = db_fetch_array($result)) {
           $result_categories = db_query("SELECT cid FROM ".$prefix."categories WHERE parent_id='$cid3'");
           $num_rows_categories3 = db_num_rows($result_categories);
 	}
-
+	
 	if ($num_rows_snippets3 && $num_rows_categories3) {
 	    $summary = "  ($num_rows_snippets3 Snippets, $num_rows_categories3 Subcategories)";
 	} else if (($num_rows_snippets3) && (!$num_rows_categories3)) {
@@ -348,7 +338,7 @@ echo '
 	    </form>
 	    <br><br>
      ';
-
+     
 if ($final_export_array) {
   echo '<a href="export.php'.$final_export_array.'" class="export_legend3">&nbsp;>>&nbsp;Click Here to Download Export File&nbsp;<<&nbsp;</a><p>&nbsp;</p>';
 }
@@ -403,6 +393,6 @@ echo '
      ';
 
 
-include_once("include/footer.php");
+include_once("footer.php");
 
 ?>

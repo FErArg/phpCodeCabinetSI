@@ -1,11 +1,6 @@
 <?php
 
-include_once("include/header.php");
-
-// SerInformaticos
-foreach( $_GET as $key => $value ){
-	$_GET[$key] = filter_var($_GET[$key], FILTER_SANITIZE_STRING);
-}
+include_once("header.php");
 
 if ($_GET['op'] == "logout") {
 
@@ -99,5 +94,5 @@ echo '
   print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=index.php">';
 }
 
-include_once("include/footer.php");
+include_once("footer.php");
 ?>

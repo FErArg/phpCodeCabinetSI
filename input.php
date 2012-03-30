@@ -1,38 +1,18 @@
 <?php
 
-include_once("include/header.php");
+include_once("header.php");
 
 if ($_SESSION['isloggedin'] != $glbl_hash) {
   print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=user.php">';
   exit; // Redirect browser and skip the rest
 }
 
-
-/*
-  $snippet = str_replace('>', '&gt;', $snippet);
-  $snippet = str_replace('<', '&lt;', $snippet);
-*/
-// SerInformaticos
-foreach( $_POST as $key => $value ){
-	// Reemplaza el < ?php y ? > por
-	$_POST[$key] = str_replace('>', '&gt;', $_POST[$key]);
-    $_POST[$key] = str_replace('<', '&lt;', $_POST[$key]);
-
-    $_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
-}
+// User must be authenticated (above), so we can move on
 
 // SerInformaticos
 foreach( $_GET as $key => $value ){
-	// Reemplaza el < ?php y ? > por
-	$_GET[$key] = str_replace('>', '&gt;', $_GET[$key]);
-    $_GET[$key] = str_replace('<', '&lt;', $_GET[$key]);
-
-    $_GET[$key] = filter_var($_GET[$key], FILTER_SANITIZE_STRING);
+	$_GET[$key] = filter_var($_GET[$key], FILTER_SANITIZE_STRING);
 }
-
-
-// User must be authenticated (above), so we can move on
-
 
 if (!$_GET['cid']) {
   // User must select category before entering code
@@ -71,7 +51,7 @@ if (($_GET['change'] == 1) && ($_GET['sid']) && ($_SESSION['isloggedin'])) {
   if ($mod_owner_id != $_SESSION['userid']) {
       if ($_SESSION['isadmin'] != $glbl_hash) {
           unset($mod_sid,$mod_name,$mod_description,$mod_comment,$mod_author_name,$mod_author_email,$mod_language,$mod_highlight_mode,$mod_owner_id,$mod_snippet);
-	 print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=browse.php">';
+	  print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=browse.php">';
       }
   }
 
@@ -84,7 +64,7 @@ if (($_GET['change'] == 1) && ($_GET['sid']) && ($_SESSION['isloggedin'])) {
     $mod_comment = stripslashes($mod_comment);
     $mod_author_name = stripslashes($mod_author_name);
     $mod_language = stripslashes($mod_language);
-    //$mod_snippet = stripslashes($mod_snippet);
+    $mod_snippet = stripslashes($mod_snippet);
   }
 
 
@@ -95,6 +75,10 @@ if (($_GET['change'] == 1) && ($_GET['sid']) && ($_SESSION['isloggedin'])) {
 
 }
 
+// SerInformaticos
+foreach( $_POST as $key => $value ){
+	$_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
+}
 
 // Upon submission, check for required variables
 if ($_POST['submit'] && $_POST['snippet'] && $_POST['snippet_name'] && $_POST['category_id']) {
@@ -146,9 +130,18 @@ if ($_POST['submit'] && $_POST['snippet'] && $_POST['snippet_name'] && $_POST['c
   if ($_POST['sid']) {
     $update = db_query("UPDATE ".$prefix."snippets SET name='$stripped_snippet_name', description='$stripped_description', comment='$stripped_comment', author_name='$stripped_author_name', author_email='".strip_tags($author_email)."', language='$stripped_language', highlight_mode='$highlight_mode', category_id='".$_POST['category_id']."', last_modified='$last_modified', snippet='$stripped_snippet' WHERE sid='".$_POST['sid']."'");
   } else {
-    $insert = db_query("INSERT INTO ".$prefix."snippets (name, description, comment, author_name, author_email, language, highlight_mode, category_id, last_modified, owner_id, snippet) VALUES ('$stripped_snippet_name','$stripped_description','$stripped_comment','$stripped_author_name','$author_email','$stripped_language','$highlight_mode','".$_POST['category_id']."','$last_modified','".$_SESSION['userid']."','$stripped_snippet')");
+	if( empty($_POST['language']) ){
+		$_POST['language'] = $_POST['highlight_mode'];
+	}
+    $insert = db_query("INSERT INTO ".$prefix."snippets (name, description, comment, author_name, author_email, language, highlight_mode, category_id, last_modified, owner_id, snippet)
+						VALUES ('$stripped_snippet_name','$stripped_description','$stripped_comment','$stripped_author_name','$author_email','$stripped_language','$highlight_mode','".$_POST['category_id']."','$last_modified','".$_SESSION['userid']."','$stripped_snippet')");
+/*
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
+*/
   }
-	// echo $stripped_snippet;
+
   unset($_POST['submit'],$_POST['snippet'],$_POST['snippet_name'],$_POST['language'],$language,$_POST['highlight_mode'],$highlight_mode,$_POST['category_id'],$_POST['author_email'],$author_email,$_POST['permission'],$last_modified,$owner_id);
 
   print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=browse.php?cid='.$redirect.'">';
@@ -162,7 +155,7 @@ if ($_POST['submit'] && $_POST['snippet'] && $_POST['snippet_name'] && $_POST['c
 
 echo '
 <p>&nbsp;</p>
-<table width="790" border="0" cellspacing="2" cellpadding="3" align="center">
+<table width="90%" border="0" cellspacing="2" cellpadding="3" align="center">
   <form action="'.$_SERVER['PHP_SELF'].'?cid='.strip_tags($_GET['cid']).'" method="post">
     <tr valign="top">
       <td align="left" colspan="2">
@@ -178,7 +171,7 @@ echo '
         <br>
       </td>
       <td align="left" rowspan="11">ENTER CODE SNIPPET BELOW <font color="red">(Required)</font>:<br>
-        <textarea name="snippet" cols="45" rows="50" wrap="off" tabindex="10">'.$mod_snippet.'</textarea>
+        <textarea name="snippet" cols="85" rows="50" wrap="off" tabindex="10">'.$mod_snippet.'</textarea>
       </td>
     </tr>
     <tr valign="top">
@@ -225,58 +218,60 @@ echo '
       <select name="highlight_mode" size="1" tabindex="6">';
 
 $highlightMode = array(
-			"a"	=> "ada95",
-			"ada"	=> "ada95",
-			"adb"	=> "ada95",
-			"ads"	=> "ada95",
-			"asm"	=> "asm_x86",
-			"asp"	=> "jscript|vb|vbdotnet",
+//			"a"	=> "ada95",
+//			"ada"	=> "ada95",
+//			"adb"	=> "ada95",
+//			"ads"	=> "ada95",
+//			"asm"	=> "asm_x86",
+			"asp"	=> "asp",
 			"awk"	=> "awk",
-			"bas"	=> "vb|vbdotnet",
+//			"bas"	=> "vb|vbdotnet",
+			"bash"	=> "bash",
 			"c"	=> "c",
-			"cbl"	=> "cobol",
-			"cls"	=> "vb|vbdotnet",
-			"cob"	=> "cobol",
-			"cpy"	=> "cobol",
-			"cpp"	=> "cpp",
-			"cs"	=> "csharp",
-			"cxx"	=> "cpp",
-			"dat"	=> "mumps",
-			"dpr"	=> "delphi",
-			"e"	=> "eiffel|euphoria",
-			"ew"	=> "euphoria",
-			"eu"	=> "euphoria",
-			"ex"	=> "euphoria",
-			"exw"	=> "euphoria",
-			"exu"	=> "euphoria",
-			"frm"	=> "vb|vbdotnet",
-			"h"	=> "c",
-			"hpp"	=> "cpp",
+//			"cbl"	=> "cobol",
+//			"cls"	=> "vb|vbdotnet",
+//			"cob"	=> "cobol",
+//			"cpy"	=> "cobol",
+//			"cpp"	=> "cpp",
+//			"cs"	=> "csharp",
+//			"cxx"	=> "cpp",
+//			"dat"	=> "mumps",
+//			"dpr"	=> "delphi",
+//			"e"	=> "eiffel|euphoria",
+//			"ew"	=> "euphoria",
+//			"eu"	=> "euphoria",
+//			"ex"	=> "euphoria",
+//			"exw"	=> "euphoria",
+//			"exu"	=> "euphoria",
+//			"frm"	=> "vb|vbdotnet",
+//			"h"	=> "c",
+//			"hpp"	=> "cpp",
 			"html"	=> "html",
 			"html5"	=> "html5",
-			"inc"	=> "turbopascal|vb|vbdotnet",
-			"java"	=> "javaswing",
-			"js"	=> "jscript|javascript",
-			"lsp"	=> "lisp",
-			"m"	=> "mumps",
-			"pas"	=> "delphi|turbopascal",
+//			"inc"	=> "turbopascal|vb|vbdotnet",
+			"java"	=> "java",
+			"js"	=> "javascript",
+//			"lsp"	=> "lisp",
+//			"m"	=> "mumps",
+//			"pas"	=> "delphi|turbopascal",
 			"php"	=> "php",
 			"php3"	=> "php3",
 			"php4"	=> "php4",
 			"php5"	=> "php5",
 			"pl"	=> "perl",
-			"pm"	=> "perl",
+//			"pm"	=> "perl",
 			"py"	=> "python",
-			"pyc"	=> "python",
-			"rtn"	=> "mumps",
-			"scm"	=> "scheme",
-			"vb"	=> "vb|vbdotnet",
-			"vbs"	=> "vb|vbdotnet|vbscript",
-			"wsf"	=> "vbscript");
+//			"pyc"	=> "python",
+//			"rtn"	=> "mumps",
+//			"scm"	=> "scheme",
+//			"vb"	=> "vb|vbdotnet",
+//			"vbs"	=> "vb|vbdotnet|vbscript",
+//			"wsf"	=> "vbscript"
+			);
 
 foreach ( $highlightMode as $key => $value ){
 	// echo '<option value="'.$value.'" selected>'.$value.'</option>';
-	echo '<option value="'.$value.'">'.$value.'</option>';
+	echo '<option value="'.$value.'" >'.$value.'</option>';
 }
 /*
       if ($mod_highlight_mode) {
@@ -342,6 +337,6 @@ echo '
 <p>&nbsp;</p>
       ';
 
-include_once("include/footer.php");
+include_once("footer.php");
 
 ?>
