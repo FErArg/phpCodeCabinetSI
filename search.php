@@ -2,6 +2,11 @@
 
 include_once("header.php");
 
+if ($_SESSION['isloggedin'] != $glbl_hash) {
+  print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=user.php">';
+  exit; // Redirect browser and skip the rest
+}
+
 // SerInformaticos
 foreach( $_POST as $key => $value ){
 	$_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);

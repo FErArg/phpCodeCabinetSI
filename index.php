@@ -2,6 +2,10 @@
 
 include_once("header.php");
 
+if ($_SESSION['isloggedin'] != $glbl_hash) {
+  print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=user.php">';
+  exit; // Redirect browser and skip the rest
+}
 
 echo '
 

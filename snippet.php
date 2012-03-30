@@ -2,6 +2,11 @@
 
 include_once("header.php");
 
+if ($_SESSION['isloggedin'] != $glbl_hash) {
+  print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=user.php">';
+  exit; // Redirect browser and skip the rest
+}
+
 $result = db_query("SELECT sid,name,description,comment,author_name,author_email,language,highlight_mode,category_id,last_modified,owner_id,snippet FROM ".$prefix."snippets WHERE sid='".$_GET['sid']."'");
 list($sid,$name,$description,$comment,$author_name,$author_email,$language,$highlight_mode,$category_id,$last_modified,$owner_id,$snippet) = db_fetch_array($result);
 

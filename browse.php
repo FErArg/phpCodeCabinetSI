@@ -2,6 +2,11 @@
 
 include_once("header.php");
 
+if ($_SESSION['isloggedin'] != $glbl_hash) {
+  print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=user.php">';
+  exit; // Redirect browser and skip the rest
+}
+
 function check_sub_owners($cid,$owner,$cnt) {
 GLOBAL $prefix;
 // Recursive function to check for categories or snippets not
@@ -167,7 +172,7 @@ while ($r = db_fetch_array($result)) {
           $result_categories = db_query($query_categories);
           $num_rows_categories3 = db_num_rows($result_categories);
 	}
-	
+
 	if ($num_rows_snippets3 && $num_rows_categories3) {
 	    $summary = "  ($num_rows_snippets3 Snippets, $num_rows_categories3 Subcategories)";
 	} else if (($num_rows_snippets3) && (!$num_rows_categories3)) {
