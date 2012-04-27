@@ -5,7 +5,7 @@
 
 /* URL for phpCC */
 # NOTE: No trailing slash
-$base_url = "http://your-ip-or-domain/phpcc";
+$base_url = "http://serinformaticos.mine.nu:6088/phpcc";
 
 
 /* Database Abstraction Layer Directory */
@@ -23,13 +23,13 @@ $dbtype = "mysql";      // Database type
                         // pgsql = PostgreSQL
 
 $dbhost = "localhost";  // Database hostname
-$dbname = "dbname";           // Database name
-$dbuser = "dbuser";           // Database username
-$dbpass = "dbpass";           // Database password
+$dbname = "phpCodeCabinet";           // Database name
+$dbuser = "phpCodeCabinet";           // Database username
+$dbpass = "156379FErArg";           // Database password
 
 
 # Snippet comment options
-$allow_comments = 0;	// 0 = No Comments
+$allow_comments = 1;	// 0 = No Comments
 			// 1 = Only authenticated users & admins
 			// 2 = Anyone can post comments
 
@@ -39,23 +39,23 @@ $allow_comments = 0;	// 0 = No Comments
 $theme = "phpcc";
 
 
-/* HFile Directory */ /* <- UPDATED TO HIGHLIGHT.JS */
+/* HFile Directory */
 # The "HFile" directory is used by the Beautifier
 # syntax highlighter.  You will need to provide the
 # full path to your HFile directory.
-// $HFile_dir = "/var/www/phpcc/include/HFile";
+$HFile_dir = "/var/www/phpcc/include/HFile";
 
 
 /* Site Title */
 # Simple HTML <title>, used primarily for
 # standalone installations.  Do not include html tags.
-$site_title = "PHPcODEcABINETsi";
+$site_title = "phpCodeCabinetSI";
 
 
 /* Allow Indexing */
 # Prevent indexing and following of links for
 # spidering search engines.
-$allow_index = 0; // (0 = No)
+$allow_index = 1; // (0 = No)
 
 
 /* Allowed HTML Tags */
@@ -77,7 +77,7 @@ $allow_anon_export = 0;  // (0 = No)
 # The global hash string is used to ensure that your
 # site remains secure.  Be sure to change this from
 # the default to something unique.
-$glbl_hash = "b080b47fc3cbd967620c81a0f215feb5";
+$glbl_hash = "*&fp7uC-9DA#2^jF&}E1|K8Q%dP/T7bo7uf{1]}|a:Pa_pm4O.";
 
 
 

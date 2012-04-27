@@ -1,6 +1,7 @@
 <?php
 
 include_once("header.php");
+// include("framework.php");
 
 if ($_SESSION['isloggedin'] != $glbl_hash) {
   print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=user.php">';
@@ -21,8 +22,21 @@ if ($magic_quotes_gpc) {
     //$snippet = stripslashes($snippet);
 }
 
-
-
+// SerInformaticos
+/*
+echo "<pre>";
+echo "id ".$sid."<br />";
+echo "name ".$name."<br />";
+echo "desc ".$description."<br />";
+echo "comm ".$comment."<br />";
+echo "auth ".$author_name."<br />";
+echo "mail ".$author_email."<br />";
+echo "lang ".$language."<br />";
+echo "high ".$highlight_mode."<br />";
+echo "owner_id ".$owner_id."<br />";
+echo "snip ".$snippet."<br />";
+echo "</pre>";
+*/
 if ($author_email) { $author_email = "&lt;<a href=\"mailto:$author_email\">$author_email</a>&gt;"; }
 
 
@@ -41,15 +55,6 @@ if (($_GET['del'] == 1) && (($owner_id == $_SESSION['userid']) || ($_SESSION['is
   }
 
 }
-
-/*
-require_once "include/Beautifier/Init.php";
-global $BEAUT_PATH;
-require_once "$BEAUT_PATH/HFile/HFile_".$highlight_mode.".php";
-require_once "$BEAUT_PATH/Output/Output_HTML.php";
-$langobj = "HFile_".$highlight_mode;
-$highlighter = new Core(new $langobj(), new Output_HTML());
-*/
 
 function trace_categories($parent_id) {
         GLOBAL $built_menu,$prefix;
@@ -115,12 +120,9 @@ if ($_GET['printable'] != 1) { //do not format page for printing
             <td valign="top" rowspan="2" colspan="1" align="left">';
 
   // SerInformaticos
-  // reemplaza < y >
-  $snippet = str_replace('>', '&gt;', $snippet);
-  $snippet = str_replace('<', '&lt;', $snippet);
-  // echo $snippet;
-  // echo "<p class=\"autotest\">\n<pre>\n<code>\n".$snippet."\n</code>\n</pre>\n</p><br>";
-  // echo "<pre>\n<p class=\"autotest\">\n<code>\n".$snippet."\n</code>\n</p>\n</pre><br>";
+
+  $snippet = limpiarTexto1($snippet);
+
   echo"<p id=\"autotest\">
 			<pre><code>".$snippet."
 		</p>";
@@ -294,9 +296,6 @@ if ($allow_comments) { // First check to make sure comments are enabled
   } // if safe_to_print_comments
 
 } // if $allow_comments
-
-
-
 
 include_once("footer.php");
 

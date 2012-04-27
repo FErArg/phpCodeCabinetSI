@@ -1,11 +1,11 @@
 <?php
 
-# Configuration file for phpCodeCabinet
+# Configuration file for phpCodeCabinetSI
 
 
 /* URL for phpCC */
 # NOTE: No trailing slash
- $base_url = "http://www.serinformaticos.es/phpcc";
+$base_url = "http://dominio/phpCodeCabinetSI";
 
 
 /* Database Abstraction Layer Directory */
@@ -24,8 +24,8 @@ $dbtype = "mysql";      // Database type
 
 $dbhost = "localhost";  // Database hostname
 $dbname = "DB";           // Database name
-$dbuser = "USER";           // Database username
-$dbpass = "PASS";           // Database password
+$dbuser = "user";           // Database username
+$dbpass = "pass";           // Database password
 
 
 # Snippet comment options
@@ -85,9 +85,6 @@ $glbl_hash = "*&fp7uC-9DA#2^jF&}E1|K8Q%dP/T7bo7uf{1]}|a:Pa_pm4O.";
 #############################
 # DO NOT EDIT BELOW THIS LINE
 #############################
-
-/* Version */
-$version = "0.6.2";
 
 switch (strtolower($dbtype)) {
     case ("mysql"):

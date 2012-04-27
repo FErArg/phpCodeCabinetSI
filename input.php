@@ -1,18 +1,40 @@
 <?php
 
 include_once("header.php");
+// include("framework.php");
+
+/*
+echo "<pre>";
+print_r($_POST);
+print_r($_GET);
+echo "</pre>";
+*/
+
 
 if ($_SESSION['isloggedin'] != $glbl_hash) {
   print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=user.php">';
   exit; // Redirect browser and skip the rest
 }
-
 // User must be authenticated (above), so we can move on
 
 // SerInformaticos
+if( isset($_POST['snippet']) ){
+	$_POST['snippet'] = limpiarTexto1($_POST['snippet']);
+}
 foreach( $_GET as $key => $value ){
 	$_GET[$key] = filter_var($_GET[$key], FILTER_SANITIZE_STRING);
 }
+foreach( $_POST as $key => $value ){
+	$_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
+}
+
+/*
+echo "<pre>";
+print_r($_POST);
+echo "---<br />";
+print_r($_GET);
+echo "</pre>";
+*/
 
 if (!$_GET['cid']) {
   // User must select category before entering code
@@ -22,7 +44,7 @@ if (!$_GET['cid']) {
   exit;
 }
 
-
+/*
 function list_files($dir) {
 // Returns array of file names from $dir
 
@@ -41,8 +63,8 @@ function list_files($dir) {
 
 return $syntax_type_arr;
 }
-
-
+*/
+// modificacion de snnipet
 if (($_GET['change'] == 1) && ($_GET['sid']) && ($_SESSION['isloggedin'])) {
 
   $result = db_query("SELECT sid,name,description,comment,author_name,author_email,language,highlight_mode,owner_id,snippet FROM ".$prefix."snippets WHERE sid='".$_GET['sid']."'");
@@ -55,6 +77,18 @@ if (($_GET['change'] == 1) && ($_GET['sid']) && ($_SESSION['isloggedin'])) {
       }
   }
 
+echo "<pre>";
+echo "id ".$mod_sid."<br />";
+echo "name ".$mod_name."<br />";
+echo "desc ".$mod_description."<br />";
+echo "comm ".$mod_comment."<br />";
+echo "auth ".$mod_author_name."<br />";
+echo "mail ".$mod_author_email."<br />";
+echo "lang ".$mod_language."<br />";
+echo "high ".$mod_highlight_mode."<br />";
+echo "owner_id ".$mod_owner_id."<br />";
+echo "snip ".$mod_snippet."<br />";
+echo "</pre>";
 
   $magic_quotes_gpc = (bool) ini_get('magic_quotes_gpc');
   if ($magic_quotes_gpc) {
@@ -67,7 +101,6 @@ if (($_GET['change'] == 1) && ($_GET['sid']) && ($_SESSION['isloggedin'])) {
     $mod_snippet = stripslashes($mod_snippet);
   }
 
-
 } else if ((!$_GET['change']) && ($_SESSION['isloggedin'])) {
 
   $mod_author_name = $_SESSION['fullname'];
@@ -75,10 +108,6 @@ if (($_GET['change'] == 1) && ($_GET['sid']) && ($_SESSION['isloggedin'])) {
 
 }
 
-// SerInformaticos
-foreach( $_POST as $key => $value ){
-	$_POST[$key] = filter_var($_POST[$key], FILTER_SANITIZE_STRING);
-}
 
 // Upon submission, check for required variables
 if ($_POST['submit'] && $_POST['snippet'] && $_POST['snippet_name'] && $_POST['category_id']) {
@@ -97,20 +126,25 @@ if ($_POST['submit'] && $_POST['snippet'] && $_POST['snippet_name'] && $_POST['c
     $highlight_mode = $_POST['highlight_mode'];
   }
 
+  	if( empty($_POST['language']) OR $_POST['language'] == ' ' ){
+		$language = $_POST['highlight_mode'];
+		$_POST['language'] = $_POST['highlight_mode'];
+	}
+
   $redirect = $_POST['category_id'];
 
   // Create date for datetime format
   $last_modified = date("Y-m-d H:i:s", mktime());
 
-
   $magic_quotes_gpc = (bool) ini_get('magic_quotes_gpc');
   if (!$magic_quotes_gpc) {
+
     // Check for magic quotes, if it's Off, addslashes
     $stripped_snippet_name = strip_tags(addslashes($_POST['snippet_name']), $allowed_html_tags);
     $stripped_description = strip_tags(addslashes($_POST['description']), $allowed_html_tags);
     $stripped_comment = strip_tags(addslashes($_POST['comment']), $allowed_html_tags);
     $stripped_author_name = strip_tags(addslashes($_POST['author_name']), $allowed_html_tags);
-    $stripped_language = strip_tags(addslashes($language), $allowed_html_tags);
+    $stripped_language = strip_tags(addslashes($_POST['language']), $allowed_html_tags);
     $stripped_snippet = addslashes($_POST['snippet']);
 
   } else { // magic quotes must be On, so just strip the tags
@@ -118,7 +152,7 @@ if ($_POST['submit'] && $_POST['snippet'] && $_POST['snippet_name'] && $_POST['c
     $stripped_description = strip_tags($_POST['description'], $allowed_html_tags);
     $stripped_comment = strip_tags($_POST['comment'], $allowed_html_tags);
     $stripped_author_name = strip_tags($_POST['author_name'], $allowed_html_tags);
-    $stripped_language = strip_tags($language, $allowed_html_tags);
+    $stripped_language = strip_tags($_POST['language'], $allowed_html_tags);
     $stripped_snippet = $_POST['snippet'];
 
   }
@@ -126,33 +160,34 @@ if ($_POST['submit'] && $_POST['snippet'] && $_POST['snippet_name'] && $_POST['c
   $stripped_snippet = str_replace(chr(0x09),"     ",$stripped_snippet); // replace tabs with five spaces
 
   if ($_POST['sid']) {
+	  // Actualiza snippet
     $update = db_query("UPDATE ".$prefix."snippets SET name='$stripped_snippet_name', description='$stripped_description', comment='$stripped_comment', author_name='$stripped_author_name', author_email='".strip_tags($author_email)."', language='$stripped_language', highlight_mode='$highlight_mode', category_id='".$_POST['category_id']."', last_modified='$last_modified', snippet='$stripped_snippet' WHERE sid='".$_POST['sid']."'");
+
   } else {
-	if( empty($_POST['language']) ){
-		$_POST['language'] = $_POST['highlight_mode'];
-	}
-
-	if (!$_POST['language']) {
-		$language = addslashes($_POST['highlight_mode']);
-	} else {
-		$language = strtolower($_POST['language']);
-	}
+	// Agrega snippet
+		$insert = db_query("INSERT INTO ".$prefix."snippets (name, description, comment, author_name, author_email, language, highlight_mode, category_id, last_modified, owner_id, snippet)
+			VALUES ('$stripped_snippet_name','$stripped_description','$stripped_comment','$stripped_author_name','$author_email','$stripped_language','$highlight_mode','".$_POST['category_id']."','$last_modified','".$_SESSION['userid']."','$stripped_snippet')");
 
 /*
-    $insert = db_query("INSERT INTO ".$prefix."snippets (name, description, comment, author_name, author_email, language, highlight_mode, category_id, last_modified, owner_id, snippet)
-						VALUES ('$stripped_snippet_name','$stripped_description','$stripped_comment','$stripped_author_name','$author_email','$stripped_language','$highlight_mode','".$_POST['category_id']."','$last_modified','".$_SESSION['userid']."','$stripped_snippet')");
+	echo "<pre>";
+	echo "name ".$stripped_snippet_name."<br />";
+	echo "desc ".$stripped_description."<br />";
+	echo "comm ".$stripped_comment."<br />";
+	echo "auth ".$stripped_author_name."<br />";
+	echo "mail ".$author_email."<br />";
+	echo "lang ".$stripped_language."<br />";
+	echo "high ".$highlight_mode."<br />";
+	echo "snip ".$stripped_snippet."<br />";
+	echo "</pre>";
+
+	echo mysql_error();
 */
-
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
-
   }
-/*
+
   unset($_POST['submit'],$_POST['snippet'],$_POST['snippet_name'],$_POST['language'],$language,$_POST['highlight_mode'],$highlight_mode,$_POST['category_id'],$_POST['author_email'],$author_email,$_POST['permission'],$last_modified,$owner_id);
 
   print '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=browse.php?cid='.$redirect.'">';
-*/
+
   exit;
 
 } // end check for required variables
@@ -277,15 +312,21 @@ $highlightMode = array(
 //			"wsf"	=> "vbscript"
 			);
 
+// SerInformaticos
+foreach ( $highlightMode as $key => $value ) {
+	if( $key == $mod_highlight_mode ){
+		echo "<option value=\"".$key."\" selected=\"selected\">".$value."</option>\n";
+	} else{
+		echo "<option value=\"".$value."\" >".$value."</option>\n";
+	}
+}
+/*
 foreach ( $highlightMode as $key => $value ){
 	// echo '<option value="'.$value.'" selected>'.$value.'</option>';
 	echo '<option value="'.$value.'" >'.$value.'</option>';
 }
-/*
-      if ($mod_highlight_mode) {
-        echo '<option value="'.$mod_highlight_mode.'" selected>'.$mod_highlight_mode.'</option>';
-      }
 */
+/*
 $lang_types = list_files($HFile_dir);
 usort($lang_types, 'strcasecmp');
 $sizeof_lang_types = sizeof($lang_types);
@@ -293,7 +334,7 @@ for ($i=0; $i<$sizeof_lang_types; $i++) {
   if ($lang_types[$i] == $mod_highlight_mode) { continue; }
   print '<option value="'.$lang_types[$i].'">'.$lang_types[$i].'</option>';
 }
-
+*/
 echo '
         </select>
       </td>

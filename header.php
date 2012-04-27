@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("config.php");
+include("framework.php");
 
 if ($_SESSION['isloggedin'] == $glbl_hash) { $theme = $_SESSION['user_theme']; }
 

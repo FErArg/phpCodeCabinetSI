@@ -73,7 +73,7 @@ if ($_GET['printable'] != 1) {
 
   echo '
     </td>
-    <td width="15%" class="titletop" valign="top" align="center">phpCodeCabinet v'.$version.'</td>
+    <td width="15%" class="titletop" valign="top" align="center">phpCodeCabinetSI v'.$version.'</td>
   </tr>
   <tr>
     <td valign="top" colspan="2">

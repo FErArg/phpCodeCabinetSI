@@ -13,7 +13,7 @@ if ($_GET['printable'] != 1) {
       </tr>
     </table>
        ';
-} //if not printable
+}
 
 ?>
 
